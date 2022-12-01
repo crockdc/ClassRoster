@@ -1,3 +1,9 @@
+/*The following program creates a student class and roster class, each with 
+* a corresponding header file. A degree header is used to create an enumerator
+* for the 3 Degree Programs. A string of 5 students is added to the roster file, which
+* is then parsed and instantiated into unique Student objects, which are then added
+* to a vector. Various functions are then performed onto the vector and displayed. */
+
 #include <iostream>
 #include "roster.h"
 
@@ -5,58 +11,48 @@ using namespace std;
 
 int main()
 {
+    //Display unique program and programmer information.
     cout << "==========================================" << endl;
     cout << "C867-Scripting & Programming: Applications" << endl;
     cout << "Programming Language: C++" << endl;
     cout << "Student ID: 010301135" << endl;
     cout << "Name: Daniel Crocker" << endl;
     cout << "==========================================" << endl;
+    
+    const int totalStudents = 5;//Array is kept at 5.
+    
+    Roster classRoster;//Instantiate the roster(corresponding STRING with student info is within the roster.cpp)
 
-    const string studentData[] =
-    { "A1,John,Smith,John1989@gm ail.com,20,30,35,40,SECURITY",
-    "A2,Suzan,Erickson,Erickson_1990@gmailcom,19,50,30,40,NETWORK",
-    "A3,Jack,Napoli,The_lawyer99yahoo.com,19,20,40,33,SOFTWARE",
-    "A4,Erin,Black,Erin.black@comcast.net,22,50,58,40,SECURITY",
-    "A5,Daniel,Crocker,dcroc48@wgu.edu,36,54,66,41,SOFTWARE" };
-    const int totalStudents = 5;
+    cout << "\nDisplaying all students:" << endl;
+    classRoster.printAll();//Print all the students via function.
 
-    Roster roster;
+    cout << "\nDisplaying invalid emails:" << endl;
+    classRoster.printInvalidEmails();//Print the invalid emails via function.
 
-    cout << "Displaying all students:" << endl;
-    roster.printAll();
+    //Iterate through the 5 students via a for loop, each time calling the average function.
+    cout << "\nDisplaying average days in course per student:" << endl;
+    for (int i = 0; i < totalStudents; i++) {
+        classRoster.printAverageCourseDays(classRoster.getStudents()[i]->getStudentID());
+    }
 
-    //Display by degree type
+    //Display by degree type(including SOFTWARE) using the corresponding enum and iterating through each student.
     for (int i = 0; i < 3; i++) {
-        cout << "Displaying by degree type:" << degreeTypeStrings[i] << endl;
-        roster.printByDegreeProgram((DegreeProgram)i); // Casted to Degree Program
+        cout << "\nShowing students in degree program " << degreeTypeStrings[i] << ":" << endl;
+        classRoster.printByDegreeProgram((DegreeProgram)i); //Cast the integer to the Degree Program via enum.
     }
     
-    cout << "Displaying invalid emails:" << endl;
-    roster.printInvalidEmails();
+    //Remove student ID of A3 using function.
+    cout << "\nRemoving A3:" << endl;
+    classRoster.removeByStudentID("A3");
 
-    cout << "Dispalying average days in course per student:" << endl;
-    for (int i = 0; i < totalStudents; i++) {
-        roster.printAverageCourseDays(roster.getStudents()[i]->getStudentID());
-    }
+    cout << "\nDisplaying all students:" << endl;
+    classRoster.printAll();
 
-    cout << "Removing A3:" << endl;
-    roster.removeByStudentID("A3");
+    //Attempt to remove same student, different output is displayed due to student being removed from vector.
+    cout << "\nRemoving A3 again:" << endl;
+    classRoster.removeByStudentID("A3");
 
-    cout << "Removing A3 again:" << endl;
-    roster.removeByStudentID("A3");
-
-    cout << "DONE.";
+    cout << "\nDONE." << endl << endl;
     
     return 0;
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file

@@ -1,19 +1,14 @@
 #include <iostream>
-#include <iomanip>
 #include "degree.h"
 
-using std::string;
-using std::cout;
-using std::cin;
-using std::endl;
-using std::left;
-using std::setw;
+using namespace std;
 
 class Student 
 {
 public:
-	const static int daysToCompleteCourseArraySize = 3;
+	const static int daysToCompleteCourseArraySize = 3;//Only 3 inputs for each student's course completion days.
 
+//Student variables
 private:
 	string studentID;
 	string firstName;
@@ -25,7 +20,8 @@ private:
 
 public:
 	Student(); //Empty constructor
-	Student(string studentID, string firstName, string lastName, string email, int age, double daysToCompleteCourse[], DegreeProgram degreeProgram); //Constructor with parameters.
+	//Constructor with parameters.
+	Student(string studentID, string firstName, string lastName, string email, int age, double daysToCompleteCourse[], DegreeProgram degreeProgram);
 	~Student(); //Destructor for what the Student class creates.
 
 	//Accessors
@@ -46,10 +42,7 @@ public:
 	void setDaysToCompleteCourse(const double daysToCompleteCourse[]);
 	void setDegreeProgram(DegreeProgram degreeProgram);
 
-	static void printBar();
-
+	//Print details of the student
 	void print();
-
-
 };
 

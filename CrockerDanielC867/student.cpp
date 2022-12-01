@@ -1,6 +1,9 @@
 #include "student.h"
 #include <iostream>
 
+using namespace std;
+
+//Parameterless constructor sets generic values.
 Student::Student() 
 {
 	this->studentID = "";
@@ -21,6 +24,7 @@ Student::Student(string studentID, string firstName, string lastName, string ema
 	this->lastName = lastName;
 	this->email = email;
 	this->age = age;
+	//Array iterated through and created.
 	for (int i = 0; i < daysToCompleteCourseArraySize; i++) {
 		this->daysToCompleteCourse[i] = daysToCompleteCourse[i];
 	}
@@ -38,12 +42,13 @@ int Student::getAge() { return this->age; }
 const double* Student::getDaysToCompleteCourse() { return this->daysToCompleteCourse; }
 DegreeProgram Student::getDegreeProgram() { return this->degreeProgram; }
 
-//Mutators
+//Mutators; proper parameter is provided, student's corresponding variables then set to the provided argument.
 void Student::setStudentID(string studentID) { this->studentID = studentID; }
 void Student::setFirstName(string firstName) { this->firstName = firstName; }
 void Student::setLastName(string lastName) { this->lastName = lastName; }
 void Student::setEmail(string email) { this->email = email; }
 void Student::setAge(int age) { this->age = age; }
+//Days to complete each course is an array of 3, which is iterated through and assigned to the student.
 void Student::setDaysToCompleteCourse(const double daysToCompleteCourse[]) {
 	for (int i = 0; i < daysToCompleteCourseArraySize; i++) {
 		this->daysToCompleteCourse[i] = daysToCompleteCourse[i];
@@ -51,25 +56,12 @@ void Student::setDaysToCompleteCourse(const double daysToCompleteCourse[]) {
 }
 void Student::setDegreeProgram(DegreeProgram degreeProgram) { this->degreeProgram = degreeProgram; }
 
-//Print a tab separated row to describe each column.
-void Student::printBar() {
-	cout << "Displaying all students:\n";
-	cout << "ID\t";
-	cout << "First\t";
-	cout << "Last\t";
-	cout << "Email\t";
-	cout << "Age\t";
-	cout << "Course Days\t";
-	cout << "Program\t";
-	cout << endl;
-}
-
 //Print each Student's information tab separated.
 void Student::print() {
 	cout << this->studentID << "\t";
 	cout << this->firstName << "\t";
 	cout << this->lastName << "\t";
-	cout << this->email << "\t";
+	//cout << this->email << "\t";
 	cout << this->age << "\t";
 	cout << "{";
 	cout << daysToCompleteCourse[0] << ",";
